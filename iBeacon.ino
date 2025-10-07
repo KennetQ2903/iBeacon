@@ -98,6 +98,12 @@ void init_beacon() {
   advertisementData.setManufacturerData(myBeacon.getData());
   pAdvertising->setAdvertisementData(advertisementData);
 
+  // ⚡ Intervalos más cortos = actualizaciones más rápidas
+  pAdvertising->setMinInterval(0x20); // 20 ms
+  pAdvertising->setMaxInterval(0x40); // 40 ms
+  pAdvertising->setMinPreferred(0x06);
+  pAdvertising->setMaxPreferred(0x12);
+
   pAdvertising->start();
 }
 
@@ -124,5 +130,5 @@ void loop() {
     pCharacteristic->notify();
     value++;
   }
-  delay(2000);
+  delay(100);
 }
